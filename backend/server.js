@@ -7,7 +7,12 @@ const {
   readTeacherInfo,
   addTeacher,
   deleteTeacher,
-  updateTeacher
+  updateTeacher,
+  readStudents,
+  readStudentInfo,
+  addStudent,
+  deleteStudent,
+  updateStudent
 } = require("./database.js");
 
 // Initialize express app
@@ -69,6 +74,55 @@ app.post("/deleteTeacher", async function (req, res) {
 app.post("/editTeacher", async function (req, res) {
   let reqBody = req.body;
   let data = await updateTeacher(reqBody.name, reqBody.age, reqBody.id);
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(data));
+});
+
+// ============== Student Related endpoints ==============
+
+// 1. API for retrieving students
+app.get("/listStudents", async function (req, res) {
+  console.log("Request received to list students");
+  let data = await readStudents();
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(data));
+});
+
+// 2. API for retrieving a single student
+app.post("/getStudentInfo", async function (req, res) {
+  let reqBody = req.body;
+  console.log("Request received to get Student Info");
+  let data = await readStudentInfo(reqBody.id);
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(data));
+});
+
+// 3. API for adding/creating a student
+app.post("/addStudent", async function (req, res) {
+  let reqBody = req.body;
+  console.log(
+    "Request received to add student. Req body: " + JSON.stringify(reqBody)
+  );
+  let data = await addStudent(reqBody.id, reqBody.name, reqBody.age, reqBody.religion);
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(data));
+});
+
+// 4. API for deleting a student
+app.post("/deleteStudent", async function (req, res) {
+  let reqBody = req.body;
+  console.log(
+    "Request received to delete student. Req body: " + JSON.stringify(reqBody)
+  );
+  let data = await deleteStudent(reqBody.id);
+  res.setHeader("Content-Type", "application/json");
+  res.end(JSON.stringify(data));
+});
+
+// 5. API for updating a student
+app.post("/editStudent", async function (req, res) {
+  let reqBody = req.body;
+  let data = await updateStudent(reqBody.name, reqBody.age, reqBody.religion, reqBody.id);
   res.setHeader("Content-Type", "application/json");
   res.end(JSON.stringify(data));
 });
