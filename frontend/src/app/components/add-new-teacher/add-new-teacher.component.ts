@@ -14,7 +14,7 @@ export class AddNewTeacherComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  createTeacher(value: any): void {
+  createTeacher(value){
 
     const teacher = {
       id : value.id,
@@ -23,11 +23,11 @@ export class AddNewTeacherComponent implements OnInit {
     }
 
 
-    this.service.addTeacher(teacher).subscribe((response: any) => {
+    this.service.addTeacher(teacher).subscribe((response)=>{
       this.router.navigate([''])
-    }, (error: any) => {
+    },(error)=>{
       console.log('ERROR - ', error)
-    });
+    })
   }
 
 }
