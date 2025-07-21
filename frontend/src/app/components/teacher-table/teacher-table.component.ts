@@ -25,7 +25,7 @@ export class TeacherTableComponent implements OnInit {
     this.router.navigate(['addTeacher'])
   }
 
-  editTeacher(id) {
+  editTeacher(id: any): void {
     const navigationExtras: NavigationExtras = {
       state: {
         id: id
@@ -35,51 +35,51 @@ export class TeacherTableComponent implements OnInit {
   }
 
   initializeDB(){
-    this.service.initializeDB().subscribe((response) => {
+    this.service.initializeDB().subscribe((response: any) => {
       console.log('DB is Initialized')
-    }, (error) => {
+    }, (error: any) => {
       console.log('ERROR - ', error)
-    })
+    });
   }
 
   getTeacherData() {
     this.selected = 'Teachers';
-    this.service.getTeacherData().subscribe((response) => {
-      this.teacherData = Object.keys(response).map((key) => [response[key]]);
-    }, (error) => {
+    this.service.getTeacherData().subscribe((response: any) => {
+      this.teacherData = Object.keys(response).map((key: string) => [response[key]]);
+    }, (error: any) => {
       console.log('ERROR - ', error)
-    })
+    });
   }
 
   getStudentData() {
     this.selected = 'Students';
-    this.service.getStudentData().subscribe((response) => {
+    this.service.getStudentData().subscribe((response: any) => {
       this.teacherData = response;
-    }, (error) => {
+    }, (error: any) => {
       console.log('ERROR - ', error)
-    })
-  }
-
-
-search(value: string): void {
-  const searchText = value.trim().toLowerCase();
-  if (searchText.length === 0) {
-    this.getTeacherData();
-  } else {
-    this.teacherData = this.teacherData.filter((teacher) => {
-      const name = teacher[0]?.name?.toLowerCase() || '';
-      return name.includes(searchText);
     });
   }
-}
 
 
-  deleteTeacher(itemid) {
+  search(value: string): void {
+    const searchText = value.trim().toLowerCase();
+    if (searchText.length === 0) {
+      this.getTeacherData();
+    } else {
+      this.teacherData = this.teacherData.filter((teacher: any) => {
+        const name = teacher[0]?.name?.toLowerCase() || '';
+        return name.includes(searchText);
+      });
+    }
+  }
+
+
+  deleteTeacher(itemid: any): void {
     const test = {
       id: itemid
-    }
-    this.service.deleteTeacher(test).subscribe((response) => {
-      this.getTeacherData()
-    })
+    };
+    this.service.deleteTeacher(test).subscribe((response: any) => {
+      this.getTeacherData();
+    });
   }
 }

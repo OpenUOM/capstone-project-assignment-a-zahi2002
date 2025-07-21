@@ -8,36 +8,50 @@ import {AppServiceService} from '../../app-service.service';
   styleUrls: ['./edit-student.component.css']
 })
 export class EditStudentComponent implements OnInit {
-
   studentData: any;
+  id: string | number | undefined;
 
-
-  constructor(private service : AppServiceService, private router: Router) { }
-
-  navigation = this.router.getCurrentNavigation();
+  constructor(private service: AppServiceService, private router: Router) {
+    // Try to get id from navigation state (when navigated from within app)
+    const navigation = this.router.getCurrentNavigation();
+    this.id = navigation?.extras?.state?.id;
+    // If not found, try to get from localStorage or fallback (for direct URL access)
+    if (!this.id) {
+      const storedId = window.history.state?.id;
+      if (storedId) {
+        this.id = storedId;
+      }
+    }
+  }
 
   ngOnInit(): void {
     this.getStudentData();
   }
 
-  getStudentData(){
-    let student = {
-      id : this.navigation.extras.state.id
+  getStudentData(): void {
+    if (this.id === undefined || this.id === null) {
+      console.error('No student id found in navigation state or URL');
+      return;
     }
-    this.service.getOneStudentData(student).subscribe((response)=>{
+    const student = { id: this.id };
+    this.service.getOneStudentData(student).subscribe((response: any) => {
       this.studentData = response[0];
-    },(error)=>{
-      console.log('ERROR - ', error)
-    })
+    }, (error: any) => {
+      console.log('ERROR - ', error);
+    });
   }
 
-  editStudent(values){
-    values.id = this.navigation.extras.state.id;
-    this.service.editStudent(values).subscribe((response)=>{
+  editStudent(values: any): void {
+    if (this.id === undefined || this.id === null) {
+      console.error('No student id found in navigation state or URL');
+      return;
+    }
+    values.id = this.id;
+    this.service.editStudent(values).subscribe((response: any) => {
       this.studentData = response[0];
-    },(error)=>{
-      console.log('ERROR - ', error)
-    })
+    }, (error: any) => {
+      console.log('ERROR - ', error);
+    });
   }
 
 }

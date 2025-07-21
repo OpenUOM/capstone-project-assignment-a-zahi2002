@@ -7,37 +7,37 @@ import { environment } from './../environments/environment';
 })
 export class AppServiceService {
 
-  readonly ROOT_URL;
+  readonly ROOT_URL: string;
 
   constructor(private http: HttpClient) {
-    this.ROOT_URL = 'http://localhost:8080'
-}
+    this.ROOT_URL = 'http://localhost:8080';
+  }
 
-    initializeDB(){
+    initializeDB(): any {
     return this.http.get(`/api/dbinitialize`)
   }
 
-  getTeacherData(){
+  getTeacherData(): any {
     return this.http.get(`/api/listTeachers`)
   }
 
-  getStudentData(){
+  getStudentData(): any {
     return this.http.get(`/api/listStudents`)
   }
 
-  getOneStudentData(payload: Object){
+  getOneStudentData(payload: object): any {
     return this.http.post(`/api/getStudentInfo`, payload)
   }
 
-  getOneTeacherData(payload: Object){
+  getOneTeacherData(payload: object): any {
     return this.http.post(`/api/getTeacherInfo`, payload)
   }
 
-  addTeacher(payload: Object){
+  addTeacher(payload: object): any {
     return this.http.post(`/api/addTeacher`, payload)
   }
 
-  deleteTeacher(payload: Object){
+  deleteTeacher(payload: object): any {
     return this.http.post(`/api/deleteTeacher`, payload)
   }
 

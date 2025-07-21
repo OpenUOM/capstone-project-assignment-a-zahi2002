@@ -15,30 +15,39 @@ export class EditTeacherComponent implements OnInit {
 
   constructor(private service : AppServiceService, private router: Router) { }
 
-  navigation = this.router.getCurrentNavigation();
+  navigation: any;
 
   ngOnInit(): void {
+    this.navigation = this.router.getCurrentNavigation();
     this.getTeacherData();
   }
 
-  getTeacherData(){
-    let teacher = {
-      id : this.navigation.extras.state.id
+  getTeacherData(): void {
+    const id = this.navigation?.extras?.state?.id;
+    if (id === undefined || id === null) {
+      console.error('No teacher id found in navigation state');
+      return;
     }
-    this.service.getOneTeacherData(teacher).subscribe((response)=>{
+    let teacher = { id };
+    this.service.getOneTeacherData(teacher).subscribe((response: any) => {
       this.teacherData = response[0];
-    },(error)=>{
+    }, (error: any) => {
       console.log('ERROR - ', error)
-    })
+    });
   }
 
-  editTeacher(values){
-    values.id = this.navigation.extras.state.id;
-    this.service.editTeacher(values).subscribe((response)=>{
+  editTeacher(values: any): void {
+    const id = this.navigation?.extras?.state?.id;
+    if (id === undefined || id === null) {
+      console.error('No teacher id found in navigation state');
+      return;
+    }
+    values.id = id;
+    this.service.editTeacher(values).subscribe((response: any) => {
       this.teacherData = response[0];
-    },(error)=>{
+    }, (error: any) => {
       console.log('ERROR - ', error)
-    })
+    });
   }
 
 }
