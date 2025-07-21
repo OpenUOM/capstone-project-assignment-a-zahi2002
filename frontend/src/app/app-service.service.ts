@@ -13,7 +13,9 @@ export class AppServiceService {
     this.ROOT_URL = 'http://localhost:8080'
 }
 
- 
+    initializeDB(){
+    return this.http.get(`/api/dbinitialize`)
+  }
 
   getTeacherData(){
     return this.http.get(`/api/listTeachers`)
