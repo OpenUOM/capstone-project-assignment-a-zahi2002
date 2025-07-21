@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
-import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -33,7 +32,6 @@ import { EditTeacherComponent } from './components/edit-teacher/edit-teacher.com
     HttpClientModule,
     FontAwesomeModule,
     FormsModule
-    ,RouterModule
   ],
   providers: [],
   bootstrap: [AppComponent]

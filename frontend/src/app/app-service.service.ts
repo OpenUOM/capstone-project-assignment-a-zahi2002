@@ -39,11 +39,6 @@ export class AppServiceService {
     return this.http.post(`/api/deleteTeacher`, payload)
   }
 
-  initializeDB() {
-    // Adjust the endpoint as needed for your backend
-    return this.http.get(`/api/initializeDB`);
-  }
-
   editTeacher(payload: Object){
     return this.http.post(`/api/editTeacher`, payload)
   }

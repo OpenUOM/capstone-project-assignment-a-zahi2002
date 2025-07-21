@@ -15,10 +15,9 @@ export class EditTeacherComponent implements OnInit {
 
   constructor(private service : AppServiceService, private router: Router) { }
 
-  navigation: any;
+  navigation = this.router.getCurrentNavigation();
 
   ngOnInit(): void {
-    this.navigation = this.router.getCurrentNavigation();
     this.getTeacherData();
   }
 
