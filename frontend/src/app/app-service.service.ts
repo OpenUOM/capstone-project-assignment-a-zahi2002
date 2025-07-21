@@ -7,7 +7,7 @@ import { environment } from './../environments/environment';
 })
 export class AppServiceService {
 
-  readonly ROOT_URL;
+  readonly ROOT_URL: string;
 
   constructor(private http: HttpClient) {
     if(environment.production == false){

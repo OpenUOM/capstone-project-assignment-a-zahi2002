@@ -22,19 +22,19 @@ export class EditStudentComponent implements OnInit {
 
   getStudentData(){
     let student = {
-      id : this.navigation.extras.state.id
+      id : this.navigation?.extras?.state?.id
     }
     this.service.getOneStudentData(student).subscribe((response)=>{
-      this.studentData = response[0];
+      this.studentData = (response as any[])[0];
     },(error)=>{
       console.log('ERROR - ', error)
     })
   }
 
-  editStudent(values){
-    values.id = this.navigation.extras.state.id;
+  editStudent(values: any){
+    values.id = this.navigation?.extras?.state?.id;
     this.service.editStudent(values).subscribe((response)=>{
-      this.studentData = response[0];
+      this.studentData = (response as any[])[0];
     },(error)=>{
       console.log('ERROR - ', error)
     })
