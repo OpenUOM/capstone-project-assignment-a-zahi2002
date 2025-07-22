@@ -14,6 +14,10 @@ export class AppServiceService {
 }
 
  
+  dbInitialize() {
+  return this.http.get(`/api/dbInitialize`);
+  }
+
 
   getTeacherData(){
     return this.http.get(`/api/listTeachers`)
