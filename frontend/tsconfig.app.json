@@ -3,9 +3,7 @@
   "extends": "./tsconfig.base.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": [],
-    "forceConsistentCasingInFileNames": true,
-    "strict": true
+    "types": []
   },
   "files": [
     "src/main.ts",
